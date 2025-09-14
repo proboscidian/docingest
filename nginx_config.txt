@@ -1,0 +1,47 @@
+# Nginx Configuration for Document Ingest Service
+# Add this to your Plesk Additional Nginx Directives
+
+# Document Ingest Service Proxy
+location /ingestapp/ {
+    proxy_pass http://127.0.0.1:8999/;
+    proxy_set_header Host $host;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    
+    # CORS headers for API access
+    proxy_set_header Access-Control-Allow-Origin *;
+    proxy_set_header Access-Control-Allow-Methods "GET, POST, OPTIONS";
+    proxy_set_header Access-Control-Allow-Headers "Authorization, Content-Type";
+    
+    # Handle preflight requests
+    if ($request_method = 'OPTIONS') {
+        add_header Access-Control-Allow-Origin *;
+        add_header Access-Control-Allow-Methods "GET, POST, OPTIONS";
+        add_header Access-Control-Allow-Headers "Authorization, Content-Type";
+        add_header Access-Control-Max-Age 1728000;
+        add_header Content-Type 'text/plain charset=UTF-8';
+        add_header Content-Length 0;
+        return 204;
+    }
+}
+
+# API Documentation Proxy (for /docs and /openapi.json)
+location /ingestapp/docs {
+    proxy_pass http://127.0.0.1:8999/docs;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+
+location /ingestapp/openapi.json {
+    proxy_pass http://127.0.0.1:8999/openapi.json;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
