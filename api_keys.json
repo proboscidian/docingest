@@ -1,0 +1,17 @@
+[
+  {
+    "id": "plugin-key-1",
+    "siteName": "WordPress Plugin Test",
+    "siteUrl": "https://exciting-heisenberg.20-1-189-119.plesk.page/",
+    "contactEmail": "admin@example.com",
+    "planType": "basic",
+    "notes": "Test API key for plugin integration",
+    "apiKey": "COoRcy3kMUCfuPnpxympY6VIy9kPBYr2",
+    "createdAt": "2025-09-09T23:30:00Z",
+    "status": "active",
+    "usage": {
+      "calls": 0,
+      "lastUsed": null
+    }
+  }
+]
