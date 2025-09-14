@@ -1,0 +1,13 @@
+{
+    "authorized_ips": [
+        "69.220.152.252",
+        "47.206.224.132",
+        "20.1.189.119"
+    ],
+    "metadata": {
+        "last_updated": "2025-01-27T20:30:00+00:00",
+        "updated_by": "docingest_security",
+        "version": "1.1",
+        "notes": "Added plugin team IP for WordPress integration"
+    }
+}
